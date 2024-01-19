@@ -1,7 +1,7 @@
 # Stacks for AWS projects
 resource "spacelift_stack" "aws001-prod" {
   name           = "terraform/aws001/prod"
-  administrative = true
+  administrative = false
   autodeploy     = true
   space_id       = spacelift_space.prod.id
 
