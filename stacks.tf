@@ -2,8 +2,8 @@
 resource "spacelift_stack" "aws001-prod" {
   # Github custom app
   github_enterprise {
-      namespace = "carlos-castillo-a" 
-    }
+    namespace = "carlos-castillo-a"
+  }
 
   name           = "terraform/aws001/prod"
   administrative = false
