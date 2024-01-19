@@ -3,7 +3,7 @@ resource "spacelift_context" "spacelift" {
   description = "Configuration details for spaclift context."
   name        = "spacelift-context"
 
-  labels = ["autoattach:spacelift"]
+  labels   = ["autoattach:spacelift"]
   space_id = spacelift_space.spacelift.id # Attached to spacelift space
 }
 
