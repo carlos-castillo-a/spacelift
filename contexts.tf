@@ -9,14 +9,14 @@ resource "spacelift_context" "spacelift" {
 
 # Spacelift Variables
 resource "spacelift_environment_variable" "prod-role-name" {
-  context_id = spacelift_context.prod.id
+  context_id = spacelift_context.spacelift.id
   name       = "TF_VAR_prod_role_name"
   value      = "spacelift-prod-integration"
   write_only = true
 }
 
 resource "spacelift_environment_variable" "prod-account" {
-  context_id = spacelift_context.prod.id
+  context_id = spacelift_context.spacelift.id
   name       = "TF_VAR_prod_account"
   value      = "231172330323"
   write_only = true
@@ -30,7 +30,7 @@ resource "spacelift_context" "prod" {
   # Custom Hooks 
   after_init = ["terraform fmt -recursive -check"]
 
-  labels   = ["atoattach:prod"]
+  labels   = ["autoattach:prod"]
   space_id = spacelift_space.prod.id # Attached to Prod space
 }
 
