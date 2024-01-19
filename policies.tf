@@ -4,7 +4,7 @@ resource "spacelift_policy" "github" {
   body = file("${path.module}/policies/github-comment.rego")
   type = "NOTIFICATION"
 
-  space_id = spacelift_space.spacelift.id
+  space_id = "root"
 }
 
 resource "spacelift_policy" "pr-only" {
@@ -12,5 +12,5 @@ resource "spacelift_policy" "pr-only" {
   body = file("${path.module}/policies/github-comment.rego")
   type = "GIT_PUSH"
 
-  space_id = spacelift_space.spacelift.id
+  space_id = "root"
 }
