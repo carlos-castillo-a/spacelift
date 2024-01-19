@@ -16,12 +16,12 @@ resource "spacelift_policy" "pr-only" {
 }
 
 ### Attachments ###
-# resource "spacelift_policy_attachment" "github" {
-#   policy_id = spacelift_policy.github.id
-#   stack_id  = spacelift_space.spacelift.id
-# }
+resource "spacelift_policy_attachment" "github" {
+  policy_id = spacelift_policy.github.id
+  stack_id  = spacelift_space.spacelift.id
+}
 
-# resource "spacelift_policy_attachment" "pr-only" {
-#   policy_id = spacelift_policy.github.id
-#   stack_id  = spacelift_space.spacelift.id
-# }
+resource "spacelift_policy_attachment" "pr-only" {
+  policy_id = spacelift_policy.github.id
+  stack_id  = spacelift_space.spacelift.id
+}
