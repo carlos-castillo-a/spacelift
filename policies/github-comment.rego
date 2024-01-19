@@ -93,7 +93,7 @@ pull_request contains {"commit": input.run_updated.run.commit.hash, "body": fina
   run.state == "FAILED"
   run.type == "TRACKED"
 
-  policy_a_body := replace(replace(concat("\n", [apply_header, addedresources, changedresources, deletedresources]), "\n\n\n", "\n"), "\n\n", "\n")
+  policy_a_body := replace(replace(concat("\n", [fail_header, addedresources, changedresources, deletedresources]), "\n\n\n", "\n"), "\n\n", "\n")
   policy_b_body := sprintf(`
 
 ## Fail logs

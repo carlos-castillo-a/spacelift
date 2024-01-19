@@ -18,7 +18,7 @@ resource "spacelift_aws_integration" "this" {
 # Attach the integration to any stacks or modules that need to use it
 resource "spacelift_aws_integration_attachment" "aws001-prod" {
   integration_id = spacelift_aws_integration.this.id
-  stack_id       = "aws001-prod"
+  stack_id       = spacelift_stack.aws001-prod.id
   read           = true
   write          = true
 }
