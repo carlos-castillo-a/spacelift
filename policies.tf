@@ -5,10 +5,10 @@ resource "spacelift_policy" "github" {
   type = "NOTIFICATION"
 }
 
-resource "spacelift_stack" "pr-only" {
+resource "spacelift_policy" "pr-only" {
   name = "pr-only-push"
   body = file("${path.module}/policies/github-comment.rego")
-  type = "PUSH"
+  type = "GIT_PUSH"
 }
 
 ### Attachments ###
