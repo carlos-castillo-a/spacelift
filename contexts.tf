@@ -4,7 +4,7 @@ resource "spacelift_context" "spacelift" {
   name        = "spacelift-context"
 
   labels   = ["autoattach:spacelift"]
-  space_id = spacelift_space.spacelift.id # Attached to spacelift space
+  space_id = "root" # Attached to root space
 }
 
 # Spacelift Variables
