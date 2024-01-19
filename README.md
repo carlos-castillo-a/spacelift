@@ -1,2 +1,2 @@
-# spacelift
-Repository to manage spacelift resources
+# Spacelift
+This repository is inteded to manage spacelift resources.
