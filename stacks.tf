@@ -18,7 +18,4 @@ resource "spacelift_stack" "aws001-prod" {
 
   # Labels
   labels = ["prod", "aws"]
-
-  # Import
-  import_state_file = file("${path.module}/state/prod-state.tfstate")
 } 
