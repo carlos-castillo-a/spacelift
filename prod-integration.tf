@@ -13,12 +13,15 @@ resource "spacelift_aws_integration" "this" {
   generate_credentials_in_worker = false
   duration_seconds               = 3600
   space_id                       = spacelift_space.spacelift.id
+
+  # Auto attach
+  labels = ["autoattach:prod"]
 }
 
 # Attach the integration to any stacks or modules that need to use it
-resource "spacelift_aws_integration_attachment" "aws001-prod" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = "aws001-prod"
-  read           = true
-  write          = true
-}
+# resource "spacelift_aws_integration_attachment" "aws001-prod" {
+#   integration_id = spacelift_aws_integration.this.id
+#   stack_id       = spacelift_stack.aws001-prod.id
+#   read           = true
+#   write          = true
+# }
