@@ -6,7 +6,7 @@ locals {
 
 # For role assumption
 resource "spacelift_aws_integration" "this" {
-  name = local.role_name
+  name = var.prod_account_name
 
   # We need to set the ARN manually rather than referencing the role to avoid a circular dependency
   role_arn                       = local.role_arn

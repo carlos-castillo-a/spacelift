@@ -22,6 +22,13 @@ resource "spacelift_environment_variable" "prod-account" {
   write_only = true
 }
 
+resource "spacelift_environment_variable" "prod-account-name" {
+  context_id = spacelift_context.spacelift.id
+  name       = "TF_VAR_prod_account_name"
+  value      = "prod-castillo-a"
+  write_only = true
+}
+
 # Production Context
 resource "spacelift_context" "prod" {
   description = "Configuration details for prod context."
