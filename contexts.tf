@@ -3,7 +3,7 @@ resource "spacelift_context" "spacelift" {
   description = "Configuration details for spaclift context."
   name        = "spacelift-context"
 
-  labels   = ["spacelift"]
+  labels = ["autoattach:spacelift"]
   space_id = spacelift_space.spacelift.id # Attached to spacelift space
 }
 
@@ -13,8 +13,6 @@ resource "spacelift_environment_variable" "prod-role-name" {
   name       = "TF_VAR_prod_role_name"
   value      = "spacelift-prod-integration"
   write_only = true
-
-  labels = ["atoattach:spacelift"]
 }
 
 resource "spacelift_environment_variable" "prod-account" {
