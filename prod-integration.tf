@@ -18,10 +18,10 @@ resource "spacelift_aws_integration" "this" {
   labels = ["autoattach:prod"]
 }
 
-# Attach the integration to any stacks or modules that need to use it
-# resource "spacelift_aws_integration_attachment" "aws001-prod" {
-#   integration_id = spacelift_aws_integration.this.id
-#   stack_id       = spacelift_stack.aws001-prod.id
-#   read           = true
-#   write          = true
-# }
+# Attach the integrations
+resource "spacelift_aws_integration_attachment" "aws001-prod" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = spacelift_stack.aws001-prod.id
+  read           = true
+  write          = true
+}
