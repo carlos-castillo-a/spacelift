@@ -9,7 +9,7 @@ resource "spacelift_policy" "github" {
 
 resource "spacelift_policy" "pr-only" {
   name = "pr-only-push"
-  body = file("${path.module}/policies/github-comment.rego")
+  body = file("${path.module}/policies/pr-only.rego")
   type = "GIT_PUSH"
 
   space_id = "root"

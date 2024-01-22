@@ -4,9 +4,9 @@ import future.keywords.contains
 import future.keywords.if
 import future.keywords.in
 
-plan_header := sprintf("# ⚪️ Planned changes ([link](https://%s.app.spacelift.io/stack/%s/run/%s))\n\n![add](https://img.shields.io/badge/add-%d-brightgreen) ![change](https://img.shields.io/badge/change-%d-yellow) ![destroy](https://img.shields.io/badge/destroy-%d-red)\n\n| Action | Resource | Changes |\n| --- | --- | --- |", [input.account.name, input.run_updated.stack.id, input.run_updated.run.id, count(added), count(changed), count(deleted)])
-apply_header := sprintf("# 🟢 Applied changes ([link](https://%s.app.spacelift.io/stack/%s/run/%s))\n\n![add](https://img.shields.io/badge/add-%d-brightgreen) ![change](https://img.shields.io/badge/change-%d-yellow) ![destroy](https://img.shields.io/badge/destroy-%d-red)\n\n| Action | Resource | Changes |\n| --- | --- | --- |", [input.account.name, input.run_updated.stack.id, input.run_updated.run.id, count(added), count(changed), count(deleted)])
-fail_header := sprintf("# 🔴 Failed to apply ([link](https://%s.app.spacelift.io/stack/%s/run/%s))\n\n![add](https://img.shields.io/badge/add-%d-brightgreen) ![change](https://img.shields.io/badge/change-%d-yellow) ![destroy](https://img.shields.io/badge/destroy-%d-red)\n\n| Action | Resource | Changes |\n| --- | --- | --- |", [input.account.name, input.run_updated.stack.id, input.run_updated.run.id, count(added), count(changed), count(deleted)])
+plan_header := sprintf("# ⚪️ [Planned changes](https://%s.app.spacelift.io/stack/%s/run/%s)\n\n![add](https://img.shields.io/badge/add-%d-brightgreen) ![change](https://img.shields.io/badge/change-%d-yellow) ![destroy](https://img.shields.io/badge/destroy-%d-red)\n\n| Action | Resource |\n| --- | --- |", [input.account.name, input.run_updated.stack.id, input.run_updated.run.id, count(added), count(changed), count(deleted)])
+apply_header := sprintf("# 🟢 [Applied changes](https://%s.app.spacelift.io/stack/%s/run/%s)\n\n![add](https://img.shields.io/badge/add-%d-brightgreen) ![change](https://img.shields.io/badge/change-%d-yellow) ![destroy](https://img.shields.io/badge/destroy-%d-red)\n\n| Action | Resource |\n| --- | --- |", [input.account.name, input.run_updated.stack.id, input.run_updated.run.id, count(added), count(changed), count(deleted)])
+fail_header := sprintf("# 🔴 [Failed to apply changes](https://%s.app.spacelift.io/stack/%s/run/%s)\n\n![add](https://img.shields.io/badge/add-%d-brightgreen) ![change](https://img.shields.io/badge/change-%d-yellow) ![destroy](https://img.shields.io/badge/destroy-%d-red)\n\n| Action | Resource |\n| --- | --- |", [input.account.name, input.run_updated.stack.id, input.run_updated.run.id, count(added), count(changed), count(deleted)])
 
 addedresources := concat("\n", added)
 changedresources := concat("\n", changed)
@@ -14,27 +14,25 @@ deletedresources := concat("\n", deleted)
 
 added contains row if {
   some x in input.run_updated.run.changes
-
-  row := sprintf("| Added | `%s` | <details><summary>Value</summary>`%s`</details> |", [x.entity.address, x.entity.data.values])
+  row := sprintf("| Added | `%s` |", [x.entity.address])
   x.action == "added"
   x.entity.entity_type == "resource"
 }
 
 changed contains row if {
   some x in input.run_updated.run.changes
-
-  row := sprintf("| Changed | `%s` | <details><summary>New value</summary>`%s`</details> |", [x.entity.address, x.entity.data.values])
+  row := sprintf("| Changed | `%s` |", [x.entity.address])
   x.entity.entity_type == "resource"
-
   any([x.action == "changed", x.action == "destroy-Before-create-replaced", x.action == "create-Before-destroy-replaced"])
 }
 
 deleted contains row if {
   some x in input.run_updated.run.changes
-  row := sprintf("| Deleted | `%s` | :x: |", [x.entity.address])
+  row := sprintf("| Deleted | `%s` |", [x.entity.address])
   x.entity.entity_type == "resource"
   x.action == "deleted"
 }
+
 
 # Plan comment
 pull_request contains {"commit": input.run_updated.run.commit.hash, "body": final_body} if {
