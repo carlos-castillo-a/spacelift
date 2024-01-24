@@ -11,7 +11,7 @@ resource "spacelift_policy" "pr-only" {
   name     = "pr-only-push"
   body     = file("${path.module}/policies/pr-only.rego")
   type     = "GIT_PUSH"
-  labels   = ["autoattach:*"]
+  labels   = ["autoattach:prod", "autoattach:dev"]
   space_id = "root"
 }
 
