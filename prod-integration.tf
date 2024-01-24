@@ -1,6 +1,6 @@
 # Locals
 locals {
-  prod_role_arn  = "arn:aws:iam::${var.prod_account}:role/${var.prod_role_name}"
+  prod_role_arn = "arn:aws:iam::${var.prod_account}:role/${var.prod_role_name}"
 }
 
 # For role assumption
