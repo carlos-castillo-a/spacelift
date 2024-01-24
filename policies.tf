@@ -14,3 +14,11 @@ resource "spacelift_policy" "pr-only" {
   labels   = ["autoattach:*"]
   space_id = "root"
 }
+
+resource "spacelift_policy" "no-github-plan" {
+  name     = "no-github-plan"
+  body     = file("${path.module}/policies/prevent-gh-push.rego")
+  type     = "PLAN"
+  labels   = ["autoattach:*"]
+  space_id = "root"
+}
